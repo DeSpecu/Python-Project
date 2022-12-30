@@ -20,8 +20,33 @@ def find(find_it):
 
 def save(dane):
     file_to_save = open(path, 'a+')
-    file_to_save.write(f"{dane}\n\n")
+    dane = dane[0:dane.find("Zostało"):]
+    file_to_save.write(f"{dane}\n")
     print("Zapisano!")
+
+def previous(to_find):
+    file_search = open(path)
+    lines = file_search.readlines()
+    for x in range(len(lines)):
+        if to_find in lines[x]:
+            return lines[x:x+4]
+
+def ask():
+    answear = input("Czy chcesz wyszukać wcześniejszy strzał? y/n\n")
+    if answear == 'y':
+        day = input("Podaj dzień\n")
+        month = input("Podaj miesiąc\n")
+        year = input("Podaj rok\n")
+        hour = input("Godzina 10 czy 22?\n")
+        while hour != '10' and hour != '22':
+            print("Podaj godzinę 10 lub 22")
+            hour = input()
+
+        result = previous(f"{day}-{month}-{year} Godzina: {hour}")
+        if result is not None:
+            print(f"Promocja z tej daty:\n{list_to_string(result)}")
+        else:
+            print("Nie znaleziono!\n")
 
 def request():
     date = datetime.datetime.now()
@@ -40,12 +65,13 @@ def request():
     ilosc = tree.xpath('//*[@id="hotShot"]/div/a/div/div[2]/p/text()')
     co = tree.xpath('//*[@id="hotShot"]/div/a/div/div[1]/div/span/img/@alt')
     
-    result = (f"Data: {date_string}\nGorący Strzał teraz:\n{list_to_string(co)}\nStara cena: {list_to_string(cenastara)}\n"
+    result = (f"Data: {date_string}\n{list_to_string(co)}\nStara cena: {list_to_string(cenastara)}\n"
     f"Nowa cena: {list_to_string(cenanowa)}\n{list_to_string(oszczednosc)}\nZostało sztuk: {list_to_string(ilosc)}")
 
     return result
 
 output = request()
+ask()
 
 date = datetime.datetime.now()
 if date.hour<22 and date.hour>9:
