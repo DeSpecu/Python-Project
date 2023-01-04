@@ -20,8 +20,7 @@ def find(find_it):
 
 def save(dane):
     file_to_save = open(path, 'a+')
-    dane = dane[0:dane.find("Zostało"):]
-    file_to_save.write(f"{dane}\n")
+    file_to_save.write(f"{dane}\n\n")
     print("Zapisano!")
 
 def previous(to_find):
@@ -62,11 +61,10 @@ def request():
     cenastara = tree.xpath('//*[@id="hotShot"]/div/a/div/div[2]/div[1]/span[1]/text()')
     cenanowa = tree.xpath('//*[@id="hotShot"]/div/a/div/div[2]/div[1]/span[2]/text()')
     oszczednosc = tree.xpath('//*[@id="hotShot"]/div/a/div/div[2]/div[2]/p/text()')
-    ilosc = tree.xpath('//*[@id="hotShot"]/div/a/div/div[2]/p/text()')
     co = tree.xpath('//*[@id="hotShot"]/div/a/div/div[1]/div/span/img/@alt')
     
     result = (f"Data: {date_string}\n{list_to_string(co)}\nStara cena: {list_to_string(cenastara)}\n"
-    f"Nowa cena: {list_to_string(cenanowa)}\n{list_to_string(oszczednosc)}\nZostało sztuk: {list_to_string(ilosc)}")
+    f"Nowa cena: {list_to_string(cenanowa)}\n{list_to_string(oszczednosc)}")
 
     return result
 
