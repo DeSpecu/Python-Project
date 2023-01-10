@@ -2,7 +2,7 @@ from lxml import html
 import requests
 import datetime
 
-path = "C://Users//szymk//Desktop//Strzaly.txt"
+path = "C://Users//szymk//Desktop//strzaly.txt"
 
 def list_to_string(s):
     news = ""
