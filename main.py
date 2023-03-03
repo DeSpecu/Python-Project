@@ -15,7 +15,7 @@ while(True):
         return news
 
     def find(find_it):
-        file_to_search = open(path)
+        file_to_search = open(path, 'w+')
         read = file_to_search.read()
         index = read.find(find_it)
         if index>-1:
