@@ -13,4 +13,5 @@ It saves a history of all offers as well, so you can search if the item had a be
 
 
 Output:
+
 ![](https://i.imgur.com/7EEeMDY.png)
